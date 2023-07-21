@@ -10,7 +10,7 @@
 mod_cat_ui <- function(id){
   ns <- NS(id)
   tagList(
-
+    uiOutput(ns('ui'))
   )
 }
 
@@ -36,15 +36,21 @@ mod_cat_server <- function(id, r){
       )
     })
 
-    output$botao_alternativas <- renderUI({
-      r$carrossel_itens[['radio']](
-        df_instrumento,
-        next_item(
+    observe({
+      isolate({
+        r$it_select <- next_item(
           df = df_instrumento,
           aplicados = r$cat$aplicados,
           theta_inicial = r$config$theta_inicial,
           theta = r$cat$theta
-        ),
+        )
+      })
+    })
+
+    output$botao_alternativas <- renderUI({
+      r$carrossel_itens[['radio']](
+        df_instrumento,
+        r$it_select,
         ns
       )
     })
@@ -78,36 +84,48 @@ mod_cat_server <- function(id, r){
       # Calcula o escore e atualiza o mod para as próximas perguntas
       r$cat <- atualiza_r_cat(
         mod = r$cat,
-        it_select = next_item(
-          df = df_instrumento,
-          aplicados = r$cat$aplicados,
-          theta_inicial = r$config$theta_inicial,
-          theta = r$cat$theta
-        ),
+        it_select = r$it_select,
         input = input$alternativas,
         df = df_instrumento,
-        modelo_cat = mod_total[[nome_cat]]
+        modelo_cat = mirt_model
       )
 
       # Verifica se a CAT chegou ao fim
-      r[[nome_cat]]$fim <- fim_cat(
+      r$cat$fim <- fim_cat(
         # criterios
         criterio = list(
           erro = r$config$erro,
-          max.itens = nrow(df)
+          max.itens = nrow(df_instrumento)
         ),
-        erro = r[[nome_cat]]$se_atual,
-        aplicados = r[[nome_cat]]$aplicados
+        erro = r$cat$se_atual,
+        aplicados = r$cat$aplicados
       )
 
       # Caso tenha chego, toma as ações necessárias
 
-      if(r[[nome_cat]]$fim$fim){
+      if(!r$cat$fim$fim){
 
-        # Próximo fator
-        r$i <- r$i + 1
+        isolate(
+          r$it_select <- next_item(
+            df = df_instrumento,
+            aplicados = r$cat$aplicados,
+            theta_inicial = r$config$theta_inicial,
+            theta = r$cat$theta
+          )
+        )
 
-        output$ui <- renderUI(r$instrumentos_mods[[r$i]])
+
+        output$botao_alternativas <- renderUI({
+          r$carrossel_itens[['radio']](
+            df_instrumento,
+            r$it_select,
+            ns
+          )
+        })
+
+      } else {
+
+        output$ui <- renderUI(mod_devolutiva_ui("devolutiva_1"))
       }
 
     })

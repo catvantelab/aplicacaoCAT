@@ -7,6 +7,7 @@
 #' @noRd
 verifica_requisitos_df_instrumento <- function(df_instrumento){
   require(crayon)
+  require(mirt)
 
   # Verifica se a coluna 'item' está correta
   if ("item" %in% colnames(df_instrumento)) {
@@ -70,10 +71,35 @@ verifica_requisitos_df_instrumento <- function(df_instrumento){
     stop("As colunas de categoria não estão presentes na base de dados\n")
   }
 
+  # cria objeto Mirt
+  df_mirt_model <- df_instrumento[,c("a", colunas_b)]
+
+
+  for(i in colunas_b){
+    df_mirt_model[[i]] <- -df_mirt_model$a * df_mirt_model[[i]]
+  }
+
+  names(df_mirt_model) <- c(
+    'a1',
+    paste0('d', colunas_b_num)
+  )
+
+  mirt_model <- mirtCAT::generate.mirt_object(
+    df_mirt_model,
+    'graded'
+  )
+
+  usethis::use_data(
+    mirt_model,
+    overwrite = TRUE
+  )
+  cat(crayon::green("✔"), "Modelo gerado com sucesso\n")
+
   usethis::use_data(
     df_instrumento,
     overwrite = TRUE
   )
 
   cat(crayon::green("✔"), "Base de dados carregada com sucesso\n")
+
 }

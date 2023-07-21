@@ -17,7 +17,7 @@ app_server <- function(input, output, session) {
     theta_inicial = 0,
     # Critérios de parada:
     ## Erro
-    erro = 0.4,
+    erro = 0.3,
     ## Delta Theta
     delta.theta = NULL
   )
@@ -59,5 +59,6 @@ app_server <- function(input, output, session) {
 
   mod_apresentacao_server("apresentacao_1", r)
   mod_cat_server("cat_1", r)
+  mod_devolutiva_server("devolutiva_1", r)
 
 }

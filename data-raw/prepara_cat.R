@@ -15,6 +15,12 @@
 #'-----------------------------------------------------------------------------
 
 
+# Carrega a função --------------------------------------------------------
+
+#' ATENÇÃO!!!
+#' Rode essa linha antes de começar
+source("R/fct_verifica_requisitos_df_instrumento.R", chdir=TRUE)
+
 
 # Lê o df_instrumento -----------------------------------------------------
 
@@ -43,18 +49,7 @@ df_instrumento <- readxl::read_xlsx(
 #' Se estiver tudo certo, ela mesmo irá salvar a base de dados.
 verifica_requisitos_df_instrumento(df_instrumento)
 
-df_mirt <- df_instrumento[,8:12]
+#' Pronto!
+#' Caso queira alterar a apresentação da CAT, vá até o arquivo app_server.R
 
-names(df_mirt) <- c(
-  'a1',
-  'd1',
-  'd2',
-  'd3',
-  'd4'
-)
-
-
-mirtCAT::generate.mirt_object(
-  df_mirt,
-  itemtype = 'graded'
-)
+rstudioapi::navigateToFile("R/mod_apresentacao.R")
