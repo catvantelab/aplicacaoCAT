@@ -14,13 +14,17 @@
 #' MODIFICACOES:
 #'-----------------------------------------------------------------------------
 
-
-# Carrega a função --------------------------------------------------------
+# Carrega funções --------------------------------------------------------
 
 #' ATENÇÃO!!!
 #' Rode essa linha antes de começar
 source("R/fct_verifica_requisitos_df_instrumento.R", chdir=TRUE)
+source("R/fct_verifica_pacotes.R", chdir=TRUE)
 
+# Pacotes -----------------------------------------------------------------
+
+#' Rode o código abaixo para verificar se os pacotes necessários estão instalados
+verificar_e_instalar()
 
 # Lê o df_instrumento -----------------------------------------------------
 

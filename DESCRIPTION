@@ -1,12 +1,11 @@
-Package: CATvante
-Title: CATvante
+Package: aplicacaoCAT
+Title: plicacaoCAT
 Version: 0.0.0.9000
-Authors@R: 
-    person("Araê", "Cainã", , "arae@cavante.com", role = c("cre", "aut"))
+Authors@R: person('Araê', 'Cainã', email = 'arae@cavante.com', role = c('cre', 'aut'))
 Description: Um modelo para testagem adaptativa computadorizada.
 License: MIT + file LICENSE
-URL: https://github.com/catvantelab/CATvante
-BugReports: https://github.com/catvantelab/CATvante/issues
+URL: https://github.com/catvantelab/aplicacaoCAT
+BugReports: https://github.com/catvantelab/aplicacaoCAT/issues
 Depends: 
     R (>= 2.10)
 Imports: 
@@ -16,6 +15,7 @@ Imports:
     golem (>= 0.3.5),
     mirt,
     mirtCAT,
+    pkgload,
     shiny (>= 1.7.3),
     shinydashboard,
     shinyjs,

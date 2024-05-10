@@ -27,6 +27,7 @@ golem::add_module(name = "devolutiva") # Name of the module
 ## Add helper functions ----
 ## Creates fct_* and utils_*
 golem::add_fct("verifica_requisitos_df_instrumento")
+golem::add_fct("verifica_pacotes")
 golem::add_fct("next_item")
 golem::add_fct("cria_mod_minimo")
 golem::add_fct("atualiza_r_cat")
