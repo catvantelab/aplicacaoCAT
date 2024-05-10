@@ -19,13 +19,13 @@
 ## to change the name in the app_sys() function in app_config.R /!\
 ##
 golem::fill_desc(
-  pkg_name = "CATvante", # The Name of the package containing the App
-  pkg_title = "CATvante", # The Title of the package containing the App
+  pkg_name = "aplicacaoCAT", # The Name of the package containing the App
+  pkg_title = "plicacaoCAT", # The Title of the package containing the App
   pkg_description = "Um modelo para testagem adaptativa computadorizada.", # The Description of the package containing the App
   author_first_name = "Araê", # Your First Name
   author_last_name = "Cainã", # Your Last Name
   author_email = "arae@cavante.com", # Your Email
-  repo_url = 'https://github.com/catvantelab/CATvante' # The URL of the GitHub Repo (optional)
+  repo_url = 'https://github.com/catvantelab/aplicacaoCAT' # The URL of the GitHub Repo (optional)
 )
 
 ## Set {golem} options ----

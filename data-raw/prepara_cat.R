@@ -1,7 +1,7 @@
 #'-----------------------------------------------------------------------------
 #' PROJETO: CATvante
 #'
-#' OBJETIVO: Gerar os insumos necessários para que
+#' OBJETIVO: Gerar os insumos necessários para configurar a CAT
 #'
 #' PRODUTO: bases de dados
 #'
